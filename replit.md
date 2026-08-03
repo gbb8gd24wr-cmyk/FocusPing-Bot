@@ -1,8 +1,11 @@
-# [Project name]
+# FocusPing
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+FocusPing is a dependency-free Python terminal timer for focused work sessions and gentle break reminders.
 
 ## Run & Operate
+
+- `cd FocusPing && python -m focusping` — start a default 25-minute focus session
+- `cd FocusPing && python -m unittest discover -s tests -v` — run the test suite
 
 - `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
 - `pnpm run typecheck` — full typecheck across all packages
@@ -13,6 +16,8 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Stack
 
+- FocusPing: Python 3.10+ and the standard library
+
 - pnpm workspaces, Node.js 24, TypeScript 5.9
 - API: Express 5
 - DB: PostgreSQL + Drizzle ORM
@@ -22,23 +27,28 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `FocusPing/focusping/timer.py` — phase planning, countdown timing, and formatting
+- `FocusPing/focusping/cli.py` — command-line interface and terminal output
+- `FocusPing/tests/` — standard-library unit tests
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- FocusPing has no runtime dependencies so it can run immediately in a clean Python environment.
+- Countdown timing uses a monotonic clock to avoid drift during longer sessions.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+- Start one or more focus sessions with configurable durations.
+- Insert short breaks between focus sessions or run focus phases back-to-back.
+- Display a live terminal countdown or a quiet phase-only mode.
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+No additional preferences recorded.
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- Run FocusPing commands from the `FocusPing` directory.
 
 ## Pointers
 

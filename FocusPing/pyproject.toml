@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "focusping"
+version = "0.1.0"
+description = "A small terminal focus timer with gentle break reminders."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "FocusPing" }]
+dependencies = []
+
+[project.scripts]
+focusping = "focusping.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["focusping*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
