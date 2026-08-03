@@ -1,11 +1,12 @@
 # FocusPing
 
-FocusPing is a dependency-free Python terminal timer for focused work sessions and gentle break reminders.
+FocusPing is a Python Discord bot with `!ping` and background `!timer` commands.
 
 ## Run & Operate
 
 - `cd FocusPing && python -m focusping` — start a default 25-minute focus session
 - `cd FocusPing && python -m unittest discover -s tests -v` — run the test suite
+- `python main.py` — start the Discord bot
 
 - `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
 - `pnpm run typecheck` — full typecheck across all packages
@@ -16,7 +17,7 @@ FocusPing is a dependency-free Python terminal timer for focused work sessions a
 
 ## Stack
 
-- FocusPing: Python 3.10+ and the standard library
+- FocusPing bot: Python 3.13 and `discord.py`
 
 - pnpm workspaces, Node.js 24, TypeScript 5.9
 - API: Express 5
@@ -27,28 +28,30 @@ FocusPing is a dependency-free Python terminal timer for focused work sessions a
 
 ## Where things live
 
-- `FocusPing/focusping/timer.py` — phase planning, countdown timing, and formatting
-- `FocusPing/focusping/cli.py` — command-line interface and terminal output
+- `main.py` — Discord bot entry point and commands
+- `FocusPing/focusping/timer.py` — original phase planning and countdown utilities
+- `FocusPing/focusping/cli.py` — original command-line interface
 - `FocusPing/tests/` — standard-library unit tests
 
 ## Architecture decisions
 
-- FocusPing has no runtime dependencies so it can run immediately in a clean Python environment.
-- Countdown timing uses a monotonic clock to avoid drift during longer sessions.
+- The Discord token is loaded only from the `DISCORD_TOKEN` secret and is never stored in source code.
+- `!timer` runs as a background task so the bot can continue serving commands while a timer is active.
 
 ## Product
 
-- Start one or more focus sessions with configurable durations.
-- Insert short breaks between focus sessions or run focus phases back-to-back.
-- Display a live terminal countdown or a quiet phase-only mode.
+- Respond to `!ping` with a health check.
+- Start and cancel per-user timers with `!timer`.
+- Announce timer completion in the channel where the timer was started.
 
 ## User preferences
 
-No additional preferences recorded.
+The bot token must remain in Replit Secrets under `DISCORD_TOKEN`.
 
 ## Gotchas
 
-- Run FocusPing commands from the `FocusPing` directory.
+- Run the Discord bot from the repository root with `python main.py`.
+- Enable Discord's Message Content Intent for the bot application.
 
 ## Pointers
 
